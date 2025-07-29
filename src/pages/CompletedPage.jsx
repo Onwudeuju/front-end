@@ -62,14 +62,7 @@ const CompletedPage = () => {
                     </p>
                   </div>
                   <div className="w-full bg-[#d9d9d9] h-[12px] rounded-[10px]">
-                    <div
-                      className="h-[12px]  rounded-[10px]"
-                      style={{
-                        width: `${completedGoal.progress}%`,
-                        backgroundColor:
-                          completedGoal.progress < 50 ? "#FF0000CC" : "#339933",
-                      }}
-                    ></div>
+                    <div className="h-[12px]  rounded-[10px]"></div>
                   </div>
                 </div>
 

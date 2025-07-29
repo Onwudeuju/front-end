@@ -5,21 +5,33 @@ import can from "../assets/can.png";
 
 const AllGoals = () => {
   const [goals, setGoals] = useState([]);
+  const fetchGoals = async () => {
+    try {
+      const getGoalApi = await fetch(
+        "https://goal-backend-v8uh.onrender.com/api/goals/all"
+      );
+      const goalB = await getGoalApi.json();
+      console.log(goalB);
+      setGoals(goalB);
+    } catch (error) {
+      console.log("I made a mistake");
+    }
+  };
   useEffect(() => {
-    const fetchGoals = async () => {
-      try {
-        const getGoalApi = await fetch(
-          "https://goal-backend-v8uh.onrender.com/api/goals/all"
-        );
-        const goalB = await getGoalApi.json();
-        console.log(goalB);
-        setGoals(goalB);
-      } catch (error) {
-        console.log("I made a mistake");
-      }
-    };
     fetchGoals();
   }, []);
+
+  const handleDelete = async (id) => {
+    try {
+      await fetch(
+        `https://goal-backend-v8uh.onrender.com/api/goals/${id}/delete`,
+        { method: "DELETE" }
+      );
+      fetchGoals();
+    } catch (error) {
+      console.error("Failed to delete", error);
+    }
+  };
 
   return (
     <div className="mx-[100px] my-[32px]">
@@ -86,7 +98,12 @@ const AllGoals = () => {
                       Edit
                     </p>
                   </Link>
-                  <button className="no-underline flex items-center justify-center gap-[10px] rounded-[10px] p-[16px] bg-white border border-[#0585cd] cursor-pointer">
+                  <button
+                    onClick={() => {
+                      handleDelete(goal._id);
+                    }}
+                    className="no-underline flex items-center justify-center gap-[10px] rounded-[10px] p-[16px] bg-white border border-[#0585cd] cursor-pointer"
+                  >
                     <img src={can} alt="Delete icon" />
                     <p className="font-montserrat font-semibold text-[20px] text-[#0585cd] m-0">
                       Delete
