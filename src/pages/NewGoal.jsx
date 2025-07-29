@@ -1,7 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import ladda from "../assets/amico.png";
+import { useNavigate } from "react-router-dom";
 
 const NewGoal = () => {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [progress, setProgress] = useState();
+  const navigate = useNavigate();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const newGoal = { title, description, progress };
+    try {
+      const postNewGoal = await fetch(
+        "https://goal-backend-v8uh.onrender.com/api/goals",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newGoal),
+        }
+      );
+      if (postNewGoal.ok) {
+        navigate("/allgoals");
+      } else {
+        console.error("Failed to post Goal");
+      }
+    } catch (error) {
+      console.error("error creating Goal", error);
+    }
+  };
+
   return (
     <div className="flex items-start gap-[20px] mx-[100px] my-[48px]">
       <form className="flex flex-col items-start w-[656px] bg-[#0585cd29] p-[60px_50px] gap-[66px]">
