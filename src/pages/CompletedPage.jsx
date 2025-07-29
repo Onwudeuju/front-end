@@ -39,12 +39,7 @@ const CompletedPage = () => {
         {completedGoals.map((completedGoal) => {
           return (
             <div className="text-start px-[35px] pt-[24px] pb-[50px] shadow-[0_4px_4px_rgba(0,0,0,0.2)] flex flex-col gap-[35px]">
-              <div className="flex flex-col gap-[12px]">
-                {completedGoal.progress === 100 && (
-                  <h4 className="font-montserrat font-semibold text-[20px] text-[#0585cd] m-0">
-                    Congratulations 🎉
-                  </h4>
-                )}
+              <div className="flex flex-col gap-[12px]" key={completedGoal._id}>
                 <h3 className="font-montserrat font-semibold text-[28px] text-black m-0">
                   {completedGoal.title}
                 </h3>
