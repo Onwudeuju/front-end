@@ -9,7 +9,7 @@ const CompletedPage = () => {
     const fetchCompletedGoals = async () => {
       try {
         const getGoalApi = await fetch(
-          "https://goal-backend-v8uh.onrender.com/api/goals/all"
+          "https://goal-backend-v8uh.onrender.com/api/goals/completed"
         );
         const goalB = await getGoalApi.json();
         console.log(goalB);
