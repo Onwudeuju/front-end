@@ -38,8 +38,11 @@ const CompletedPage = () => {
       <div className="mt-[40px] flex flex-col gap-[60px]">
         {completedGoals.map((completedGoal) => {
           return (
-            <div className="text-start px-[35px] pt-[24px] pb-[50px] shadow-[0_4px_4px_rgba(0,0,0,0.2)] flex flex-col gap-[35px]">
-              <div className="flex flex-col gap-[12px]" key={completedGoal._id}>
+            <div
+              key={completedGoal._id}
+              className="text-start px-[35px] pt-[24px] pb-[50px] shadow-[0_4px_4px_rgba(0,0,0,0.2)] flex flex-col gap-[35px]"
+            >
+              <div className="flex flex-col gap-[12px]">
                 <h3 className="font-montserrat font-semibold text-[28px] text-black m-0">
                   {completedGoal.title}
                 </h3>
