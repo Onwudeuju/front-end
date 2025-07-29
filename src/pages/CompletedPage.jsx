@@ -4,7 +4,7 @@ import pen from "../assets/pen.png";
 import can from "../assets/can.png";
 
 const CompletedPage = () => {
-  const [completedGoals, setCompletedGoals] = useState([]);
+  const [completeGoals, setCompleteGoals] = useState([]);
   useEffect(() => {
     const fetchCompletedGoals = async () => {
       try {
@@ -13,7 +13,7 @@ const CompletedPage = () => {
         );
         const goalB = await getGoalApi.json();
         console.log(goalB);
-        setCompletedGoals(goalB);
+        setCompleteGoals(goalB);
       } catch (error) {
         console.log("I made a mistake");
       }
@@ -36,18 +36,18 @@ const CompletedPage = () => {
       </div>
 
       <div className="mt-[40px] flex flex-col gap-[60px]">
-        {completedGoals.map((completedGoal) => {
+        {completeGoals.map((completeGoal) => {
           return (
             <div
-              key={completedGoal._id}
+              key={completeGoal._id}
               className="text-start px-[35px] pt-[24px] pb-[50px] shadow-[0_4px_4px_rgba(0,0,0,0.2)] flex flex-col gap-[35px]"
             >
               <div className="flex flex-col gap-[12px]">
                 <h3 className="font-montserrat font-semibold text-[28px] text-black m-0">
-                  {completedGoal.title}
+                  {completeGoal.title}
                 </h3>
                 <p className="font-montserrat font-normal text-[20px] leading-[24.38px] text-black/80 m-0">
-                  {completedGoal.description}
+                  {completeGoal.description}
                 </p>
               </div>
 
@@ -58,11 +58,11 @@ const CompletedPage = () => {
                       Progress
                     </p>
                     <p className="font-montserrat font-normal text-[16px] text-black/80 m-0">
-                      {completedGoal.progress}%
+                      {completeGoal.progress}%
                     </p>
                   </div>
                   <div className="w-full bg-[#d9d9d9] h-[12px] rounded-[10px]">
-                    <div className="h-[12px]  rounded-[10px]"></div>
+                    <div className="h-[12px] rounded-[10px]"></div>
                   </div>
                 </div>
 
