@@ -70,7 +70,7 @@ const AllGoals = () => {
                       style={{
                         width: `${goal.progress}%`,
                         backgroundColor:
-                          goal.progress < 50 ? "#aff0000cc" : "#339933",
+                          goal.progress < 50 ? "#FF0000CC" : "#339933",
                       }}
                     ></div>
                   </div>
