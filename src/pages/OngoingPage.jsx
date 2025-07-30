@@ -20,6 +20,18 @@ const OngoingPage = () => {
     };
     fetchOngoingGoals();
   }, []);
+  const handleDelete = async (id) => {
+    try {
+      await fetch(
+        `https://goal-backend-v8uh.onrender.com/api/goals/${id}/delete`,
+        { method: "DELETE" }
+      );
+      fetchGoals();
+    } catch (error) {
+      console.error("Failed to delete", error);
+    }
+  };
+
   return (
     <div className="mx-[100px] my-[32px]">
       <div className="flex items-center justify-between">
@@ -42,13 +54,13 @@ const OngoingPage = () => {
               key={ongoingGoal._id}
             >
               <div className="flex flex-col gap-[12px]">
-                <h3 className="font-montserrat font-semibold text-[28px] text-black m-0">
+                <h3 className="font-montserrat font-semibold text-[28px] text-black m-0 break-words">
                   {ongoingGoal.title}
                 </h3>
                 <h4 className="font-montserrat font-semibold text-[20px] text-[#0585cd] m-0">
                   In Progress
                 </h4>
-                <p className="font-montserrat font-normal text-[20px] leading-[24.38px] text-black/80 m-0">
+                <p className="font-montserrat font-normal text-[20px] leading-[24.38px] text-black/80 m-0 break-words ">
                   {ongoingGoal.description}
                 </p>
               </div>
@@ -85,7 +97,12 @@ const OngoingPage = () => {
                       Update Progress
                     </p>
                   </Link>
-                  <button className="no-underline flex items-center justify-center gap-[10px] rounded-[10px] p-[16px] bg-white border border-[#0585cd] cursor-pointer">
+                  <button
+                    onClick={() => {
+                      handleDelete(goal._id);
+                    }}
+                    className="no-underline flex items-center justify-center gap-[10px] rounded-[10px] p-[16px] bg-white border border-[#0585cd] cursor-pointer"
+                  >
                     <img src={can} alt="Delete icon" />
                     <p className="font-montserrat font-semibold text-[20px] text-[#0585cd] m-0">
                       Delete
