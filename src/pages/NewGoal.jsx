@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import ladda from "../assets/amico.png";
 import { useNavigate } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
 
 const NewGoal = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [progress, setProgress] = useState();
   const navigate = useNavigate();
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     const newGoal = { title, description, progress: Number(progress) };
@@ -24,21 +22,17 @@ const NewGoal = () => {
         }
       );
       if (postNewGoal.ok) {
-        toast.success("Goal created successfully!");
-        setTimeout(() => navigate("/allgoals"), 1500);
+        navigate("/allgoals");
       } else {
-        toast.error("Failed to create goal. Please try again.");
         console.error("Failed to post Goal");
       }
     } catch (error) {
-      toast.error("An error occurred while creating the goal.");
       console.error("error creating Goal", error);
     }
   };
 
   return (
     <div className="flex items-start gap-[20px] mx-[100px] my-[48px]">
-      <Toaster position="top-right" />
       <form
         onSubmit={handleSubmit}
         className="flex flex-col items-start w-[656px] bg-[#0585cd29] p-[60px_50px] gap-[66px]"
