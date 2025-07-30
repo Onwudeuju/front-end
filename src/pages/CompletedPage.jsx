@@ -20,6 +20,17 @@ const CompletedPage = () => {
     };
     fetchCompletedGoals();
   }, []);
+  const handleDelete = async (id) => {
+    try {
+      await fetch(
+        `https://goal-backend-v8uh.onrender.com/api/goals/${id}/delete`,
+        { method: "DELETE" }
+      );
+      fetchGoals();
+    } catch (error) {
+      console.error("Failed to delete", error);
+    }
+  };
 
   return (
     <div className="mx-[100px] my-[32px]">
@@ -43,10 +54,10 @@ const CompletedPage = () => {
               className="text-start px-[35px] pt-[24px] pb-[50px] shadow-[0_4px_4px_rgba(0,0,0,0.2)] flex flex-col gap-[35px]"
             >
               <div className="flex flex-col gap-[12px]">
-                <h3 className="font-montserrat font-semibold text-[28px] text-black m-0">
+                <h3 className="font-montserrat font-semibold text-[28px] text-black m-0 break-words">
                   {completeGoal.title}
                 </h3>
-                <p className="font-montserrat font-normal text-[20px] leading-[24.38px] text-black/80 m-0">
+                <p className="font-montserrat font-normal text-[20px] leading-[24.38px] text-black/80 m-0 break-words">
                   {completeGoal.description}
                 </p>
               </div>
@@ -68,7 +79,7 @@ const CompletedPage = () => {
 
                 <div className="w-[30%] flex justify-between cursor-pointer">
                   <Link
-                    to="/progress"
+                    to={`/progress/${completeGoal._id}`}
                     className="no-underline flex items-center justify-center gap-[10px] rounded-[10px] p-[16px] bg-[#0585cd] cursor-pointer"
                   >
                     <img src={pen} alt="Edit icon" />
@@ -76,7 +87,12 @@ const CompletedPage = () => {
                       Edit
                     </p>
                   </Link>
-                  <button className="no-underline flex items-center justify-center gap-[10px] rounded-[10px] p-[16px] bg-white border border-[#0585cd] cursor-pointer">
+                  <button
+                    onClick={() => {
+                      handleDelete(goal._id);
+                    }}
+                    className="no-underline flex items-center justify-center gap-[10px] rounded-[10px] p-[16px] bg-white border border-[#0585cd] cursor-pointer"
+                  >
                     <img src={can} alt="Delete icon" />
                     <p className="font-montserrat font-semibold text-[20px] text-[#0585cd] m-0">
                       Delete

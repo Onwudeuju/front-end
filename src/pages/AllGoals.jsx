@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import pen from "../assets/pen.png";
 import can from "../assets/can.png";
-
 const AllGoals = () => {
   const [goals, setGoals] = useState([]);
   const fetchGoals = async () => {
@@ -17,6 +16,7 @@ const AllGoals = () => {
       console.log("I made a mistake");
     }
   };
+
   useEffect(() => {
     fetchGoals();
   }, []);
@@ -58,10 +58,10 @@ const AllGoals = () => {
                     Congratulations 🎉
                   </h4>
                 )}
-                <h3 className="font-montserrat font-semibold text-[28px] text-black m-0">
+                <h3 className="font-montserrat font-semibold text-[28px] text-black m-0 break-words">
                   {goal.title}
                 </h3>
-                <p className="font-montserrat font-normal text-[20px] leading-[24.38px] text-black/80 m-0">
+                <p className="font-montserrat font-normal text-[20px] leading-[24.38px] text-black/80 m-0 break-words">
                   {goal.description}
                 </p>
               </div>
@@ -90,7 +90,7 @@ const AllGoals = () => {
 
                 <div className="w-[30%] flex justify-between cursor-pointer">
                   <Link
-                    to="/progress"
+                    to={`/progress/${goal._id}`}
                     className="no-underline flex items-center justify-center gap-[10px] rounded-[10px] p-[16px] bg-[#0585cd] cursor-pointer"
                   >
                     <img src={pen} alt="Edit icon" />
